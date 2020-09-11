@@ -152,7 +152,6 @@ installbbr(){
 	fi
 	echo "nameserver 8.8.8.8" > /etc/resolv.conf
 	echo "nameserver 8.8.4.4" >> /etc/resolv.conf
-	startbbr()
 }
 bbrstatus(){
 	check_bbr_status_on=`sysctl net.ipv4.tcp_congestion_control | awk '{print $3}'`
