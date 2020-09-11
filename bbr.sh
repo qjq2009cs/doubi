@@ -120,7 +120,6 @@ del_deb_over(){
 }
 # 安装BBR
 installbbr(){
-	check_root
 	get_latest_version
 	deb_ver=`dpkg -l|grep linux-image | awk '{print $2}' | awk -F '-' '{print $3}' | grep '[4-9].[0-9]*.'`
 	latest_version_2=$(echo "${latest_version}"|grep -o '\.'|wc -l)
