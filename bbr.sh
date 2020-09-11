@@ -152,23 +152,6 @@ installbbr(){
 	fi
 	echo "nameserver 8.8.8.8" > /etc/resolv.conf
 	echo "nameserver 8.8.4.4" >> /etc/resolv.conf
-	
-	wget -O "${deb_kernel_name}" "${deb_kernel_url}"
-	if [[ -s ${deb_kernel_name} ]]; then
-		echo -e "${Info} 内核文件下载成功，开始安装内核..."
-		dpkg -i ${deb_kernel_name}
-		rm -rf ${deb_kernel_name}
-	else
-		echo -e "${Error} 内核文件下载失败，请检查 !" && exit 1
-	fi
-	#判断内核是否安装成功
-	deb_ver=`dpkg -l | grep linux-image | awk '{print $2}' | awk -F '-' '{print $3}' | grep "${latest_version}"`
-	if [[ "${deb_ver}" != "" ]]; then
-		echo -e "${Info} 检测到 内核 已安装成功，开始卸载其余内核..."
-		del_deb_over
-	else
-		echo -e "${Error} 检测到 内核版本 安装失败，请检查 !" && exit 1
-	fi
 }
 bbrstatus(){
 	check_bbr_status_on=`sysctl net.ipv4.tcp_congestion_control | awk '{print $3}'`
